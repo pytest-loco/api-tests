@@ -1,0 +1,42 @@
+extends: default
+
+ignore-from-file:
+- .gitignore
+- .yamlignore
+
+yaml-files:
+  - 'test_*.yaml'
+  - 'test_*.yml'
+
+rules:
+  line-length:
+    max: 110
+  braces:
+    forbid: non-empty
+  brackets:
+    forbid: non-empty
+  comments:
+    ignore-shebangs: true
+    require-starting-space: true
+    min-spaces-from-content: 1
+  indentation:
+    spaces: 2
+    indent-sequences: false
+  new-lines:
+    type: platform
+  document-start:
+    present: true
+  document-end:
+    present: false
+  float-values:
+    forbid-inf: true
+    forbid-nan: true
+  quoted-strings:
+    required: only-when-needed
+    quote-type: consistent
+  truthy:
+    allowed-values:
+    - 'true'
+    - 'false'
+    - 'yes'
+    - 'no'

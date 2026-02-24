@@ -1,0 +1,156 @@
+---
+spec: case
+title: Test API endpoints
+description: >
+  This test case verifies the functionality of various API endpoints
+  provided by httpbin.org. It includes tests for GET, PATCH, and POST requests,
+  ensuring that the responses are as expected and that the data sent in the
+  requests is correctly received by the server.
+metadata:
+  tags:
+  - api
+vars:
+  baseUrl: https://httpbin.org
+
+---
+title: Test GET
+description: >
+  This test verifies that a GET request to the /get endpoint returns a status
+  code of 200 and that the response contains the correct URL from the request.
+
+action: http.get
+url: !urljoin baseUrl /get
+headers:
+  accept: application/json
+
+output: response
+
+expect:
+
+- title: Status is 200
+  value: !var response.status
+  match: 200
+
+- title: Response contains request URL
+  description: >
+    The response should include the URL that was requested, confirming that
+    the server received the correct request and is returning the expected
+    data in the response.
+  value: !load
+    format: json
+    source: !var response.text
+    select: $.url
+  match: https://httpbin.org/get
+
+---
+title: Test PATCH with JSON content
+description: >
+  This test verifies that a PATCH request to the /patch endpoint with JSON content
+  returns a status code of 200 and that the response contains the correct JSON
+  data that was sent in the request.
+
+vars:
+  requestData: !dump
+    format: json
+    source:
+      name: Molecule Man
+      age: 29
+      secretIdentity: Dan Jukes
+      powers:
+      - Radiation resistance
+      - Turning tiny
+      - Radiation blast
+
+action: http.patch
+url: !urljoin baseUrl /patch
+headers:
+  accept: application/json
+  content-type: application/json
+data: !var requestData
+
+output: response
+
+expect:
+
+- title: Status is 200
+  value: !var response.status
+  match: 200
+
+- title: Body was sent
+  description: >
+    The response should include the JSON data that was sent in the request, confirming
+    that the server received the correct data and is returning the expected
+    information in the response.
+  value: !load
+    format: json
+    source: !var response.text
+    select: $.json
+  partialMatch: yes
+  match:
+    name: Molecule Man
+    age: 29
+
+---
+title: Test POST with text file
+description: >
+  This test verifies that a POST request to the /post endpoint with a text file
+  returns a status code of 200 and that the response contains the correct file
+  content that was sent in the request.
+
+action: http.post
+url: !urljoin baseUrl /post
+headers:
+  accept: application/json
+files:
+- name: test
+  content: Hello, World!
+
+output: response
+
+expect:
+
+- title: Status is 200
+  value: !var response.status
+  match: 200
+
+- title: Body was sent
+  description: >
+    The response should include the content of the file that was sent in the
+    request, confirming that the server received the file correctly and is
+    returning the expected data in the response.
+  value: !load
+    format: json
+    source: !var response.text
+    select: $.files
+  match:
+    test: Hello, World!
+
+---
+title: Test redirects history
+description: >
+  This test verifies that a GET request to the /redirect-to endpoint with a URL
+  parameter that points to a /status/204 endpoint returns a status code of 204
+  and that the response history includes a redirect with a status code of 302.
+
+action: http.get
+url: !urljoin baseUrl /redirect-to
+params:
+  url: !urljoin baseUrl /status/204
+headers:
+  accept: application/json
+
+output: response
+
+expect:
+
+- title: Status is 204
+  value: !var response.status
+  match: 204
+
+- title: History is not empty
+  value: !var response.history
+  notEqual: []
+
+- title: Status of redirect response is 302
+  value: !var response.history.0.status
+  match: 302

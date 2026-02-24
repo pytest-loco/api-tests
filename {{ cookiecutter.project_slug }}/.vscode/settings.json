@@ -1,0 +1,21 @@
+{
+    "yaml.customTags": [
+        "!base64 scalar",
+        "!binaryFile scalar",
+        "!binaryHex scalar",
+        "!date scalar",
+        "!datetime scalar",
+        "!dump mapping",
+        "!duration scalar",
+        "!jsonpath scalar",
+        "!load mapping",
+        "!secret scalar",
+        "!textFile scalar",
+        "!timedelta scalar",
+        "!urljoin scalar",
+        "!var scalar"
+    ],
+    "yaml.schemas": {
+        ".vscode/loco.schema.json": "test_*.{yaml,yml}"
+    }
+}

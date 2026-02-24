@@ -1,0 +1,6 @@
+{
+    "project_name": "API Tests Boilerplate",
+    "project_slug": "{{ cookiecutter.project_name | trim | lower | replace(' ', '-') }}",
+    "project_short_description": "Python Boilerplate contains all the boilerplate you need to create an API tests package.",
+    "project_version": "1.0.0"
+}
