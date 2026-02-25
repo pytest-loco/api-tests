@@ -4,7 +4,7 @@
 
 ## How to run tests
 
-**Prerequisites**: [Python 3.13](https://www.python.org/downloads/)
+**Prerequisites**: [Python](https://www.python.org/downloads/)
 and [Poetry](https://python-poetry.org/docs/#installing-with-pipx) must be installed.
 
 Set up the environment:
@@ -23,7 +23,7 @@ That's all, folks!
 
 ## How to write tests
 
-**Prerequisites**: [Python 3.13](https://www.python.org/downloads/)
+**Prerequisites**: [Python](https://www.python.org/downloads/)
 and [Poetry](https://python-poetry.org/docs/#installing-with-pipx) must be installed.
 
 Set up the environment:
