@@ -27,8 +27,6 @@ optional = true
 minversion = "9.0.0"
 testpaths = ["tests"]
 addopts = [
-    "-n", "0",
-    "-q",
     "--strict-config",
     "--tb", "short",
 ]
