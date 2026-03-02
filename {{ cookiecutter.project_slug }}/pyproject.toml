@@ -6,7 +6,7 @@ license = {text = "MIT"}
 readme = "README.md"
 requires-python = ">=3.13,<4"
 dependencies = [
-    "pytest-loco (>=1.3.6,<2.0.0)",
+    "pytest-loco (>=1.4.0,<2.0.0)",
     "pytest-loco-http (>=1.3.6,<2.0.0)",
     "pytest-loco-json (>=1.3.6,<2.0.0)",
 ]
@@ -22,6 +22,16 @@ package-mode = false
 
 [tool.poetry.group.dev]
 optional = true
+
+[tool.pytest.ini_options]
+minversion = "9.0.0"
+testpaths = ["tests"]
+addopts = [
+    "-n", "0",
+    "-q",
+    "--strict-config",
+    "--tb", "short",
+]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
