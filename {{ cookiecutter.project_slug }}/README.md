@@ -40,6 +40,16 @@ poetry run pre-commit install
 
 Place your tests in the tests directory using the `test_*.yaml` naming format.
 
+## How to view tests
+
+Run your tests as you would do normally: from the command line, from your IDE, etc.
+
+Generate the HTML report by using Allure CLI command:
+
+```sh
+allure generate --single-file --clean
+```
+
 ## DSL Reference
 
 Detailed DSL usage and syntax can be found here:

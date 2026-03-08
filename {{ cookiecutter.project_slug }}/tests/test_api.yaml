@@ -3,20 +3,26 @@ spec: case
 title: Test API endpoints
 description: >
   This test case verifies the functionality of various API endpoints
-  provided by httpbin.org. It includes tests for GET, PATCH, and POST requests,
-  ensuring that the responses are as expected and that the data sent in the
-  requests is correctly received by the server.
+  provided by [httpbin.org](https://httpbin.org). It includes tests for
+  **GET**, **PATCH**, and **POST** requests, ensuring that the responses
+  are as expected and that the data sent in the requests is correctly
+  received by the server.
 metadata:
+  suite: api-tests
+  severity: normal
   tags:
   - api
+  - http
+  links:
+  - https://httpbin.org
 vars:
   baseUrl: https://httpbin.org
 
 ---
 title: Test GET
 description: >
-  This test verifies that a GET request to the /get endpoint returns a status
-  code of 200 and that the response contains the correct URL from the request.
+  This test verifies that a **GET** request to the `/get` endpoint returns a status
+  code of `200` and that the response contains the correct URL from the request.
 
 action: http.get
 url: !urljoin baseUrl /get
@@ -45,8 +51,8 @@ expect:
 ---
 title: Test PATCH with JSON content
 description: >
-  This test verifies that a PATCH request to the /patch endpoint with JSON content
-  returns a status code of 200 and that the response contains the correct JSON
+  This test verifies that a **PATCH** request to the `/patch`` endpoint with JSON content
+  returns a status code of `200` and that the response contains the correct JSON
   data that was sent in the request.
 
 vars:
@@ -93,8 +99,8 @@ expect:
 ---
 title: Test POST with text file
 description: >
-  This test verifies that a POST request to the /post endpoint with a text file
-  returns a status code of 200 and that the response contains the correct file
+  This test verifies that a **POST** request to the `/post` endpoint with a text file
+  returns a status code of `200` and that the response contains the correct file
   content that was sent in the request.
 
 action: http.post
@@ -128,9 +134,9 @@ expect:
 ---
 title: Test redirects history
 description: >
-  This test verifies that a GET request to the /redirect-to endpoint with a URL
-  parameter that points to a /status/204 endpoint returns a status code of 204
-  and that the response history includes a redirect with a status code of 302.
+  This test verifies that a **GET** request to the `/redirect-to` endpoint with a URL
+  parameter that points to a `/status/204` endpoint returns a status code of `204`
+  and that the response history includes a redirect with a status code of `302`.
 
 action: http.get
 url: !urljoin baseUrl /redirect-to
